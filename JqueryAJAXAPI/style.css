@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+li{
+    background-color: gray;
+    list-style-type: none;
+    max-width: 300px;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+
+
+
+
+
+

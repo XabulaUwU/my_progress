@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Coffee Orders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jquery AJAX Tutorial</h1>
+    <h2>Coffee Orders</h2>
+    <ul id="orders"></ul>
+    <h4>Add Orders</h4>
+    <p>name: <input type="text" id="name"></p>
+    <p>drink: <input type="text" id="drink"></p>
+    <button id="AddOrder">Add!</button>
+</body>
+<script>
+    $(function(){
+
+         var $orders = $('#orders')
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/Orders',
+            success: function(orders){
+                $.each(orders, function(i, order){
+                    $orders.append('<li>name: ' + order.Name + ', drink: ' + order.Drink + '</li>')
+                })
+            }
+        });
+    });
+</script>
+</html>
