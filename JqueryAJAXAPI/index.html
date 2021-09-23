@@ -20,16 +20,41 @@
 <script>
     $(function(){
 
-         var $orders = $('#orders')
+        var $orders = $('#orders')
+        var $name = $('input#name')
+        var $drink = $('input#drink')
+        
+        function addOrder(order){
+            $orders.append('<li>name: ' + order.Name + ', drink: ' + order.Drink + '</li>')
+        }
+        $('#AddOrder').on('click',function(){
+            var order = {
+            "Name": $name.val(), 
+            "Drink": $drink.val()
+        }
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/Orders',
+                data: order,
+                success: function(newOrder){
+                    addOrder(newOrder)
+                }
+            })
+        })
+
         $.ajax({
             type: 'GET',
             url: 'http://localhost:3000/Orders',
             success: function(orders){
                 $.each(orders, function(i, order){
-                    $orders.append('<li>name: ' + order.Name + ', drink: ' + order.Drink + '</li>')
+                    addOrder(order)
                 })
             }
         });
+        
+
+
+
     });
 </script>
 </html>
