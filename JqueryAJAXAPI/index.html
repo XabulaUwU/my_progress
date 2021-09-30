@@ -16,6 +16,8 @@
     <p>name: <input type="text" id="name"></p>
     <p>drink: <input type="text" id="drink"></p>
     <button id="AddOrder">Add!</button>
+    
+    
 </body>
 <script>
     $(function(){
@@ -25,7 +27,7 @@
         var $drink = $('input#drink')
         
         function addOrder(order){
-            $orders.append('<li>name: ' + order.Name + ', drink: ' + order.Drink + '</li>')
+            $orders.append(`<li>Name: ${order.Name}, Drink: ${order.Drink} <button data-id='${order.id}' class="remove">X</button></li>`)
         }
         $('#AddOrder').on('click',function(){
             var order = {
@@ -51,6 +53,16 @@
                 })
             }
         });
+        $orders.delegate('.remove', 'click', function(){
+            var $li = $(this).closest('li')
+            $.ajax({
+            type: 'DELETE',
+            url: `http://localhost:3000/Orders/${$(this).attr('data-id')}`,
+            success: function(){
+                $li.fadeOut()
+            }
+        })
+        })
         
 
 
